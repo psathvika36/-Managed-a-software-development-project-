@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Management</title>
+</head>
+<body>
+<h1>Task Management</h1>
+<form method="post" action="/add">
+    <input type="text" name="description" placeholder="New Task" required>
+    <button type="submit">Add</button>
+</form>
+<ul>
+    <th:block th:each="task : ${tasks}">
+        <li>
+            <span th:text="${task.description}"></span>
+            <form method="post" action="/complete" style="display:inline;">
+                <input type="hidden" name="id" th:value="${task.id}">
+                <button type="submit" th:disabled="${task.completed}">Complete</button>
+            </form>
+            <form method="post" action="/delete" style="display:inline;">
+                <input type="hidden" name="id" th:value="${task.id}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>
